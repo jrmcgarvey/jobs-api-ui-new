@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         token = localStorage.getItem('token')
         if (token) { //if the user is logged in
             logoff.style.display = "block"
-            count = await buildJobsTable(jobsTable, jobsTableHeader, token, message)
+            const count = await buildJobsTable(jobsTable, jobsTableHeader, token, message)
             if (count > 0) {
                 jobsMessage.textContent=''
                 jobsTable.style.display = "block"
