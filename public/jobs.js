@@ -64,6 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const addingJob = document.getElementById("adding-job");
   const jobsMessage = document.getElementById("jobs-message");
   const editCancel = document.getElementById("edit-cancel");
+
+  // section 2 
   let showing = logonRegister;
   let token = null;
   document.addEventListener("startDisplay", async () => {
@@ -96,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.dispatchEvent(thisEvent);
   var suspendInput = false;
 
+  // section 3
   document.addEventListener("click", async (e) => {
     if (suspendInput) {
       return; // we don't want to act on buttons while doing async operations
@@ -192,12 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
             message.textContent = data.msg;
           }
         } catch (err) {
-          console.log("at 4");
           message.textContent = "A communications error occurred.";
         }
         suspendInput = false;
       }
-    } else if (e.target === addJob) {
+    } // section 4
+    else if (e.target === addJob) {
       showing.style.display = "none";
       editJob.style.display = "block";
       showing = editJob;
@@ -214,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
       thisEvent = new Event("startDisplay");
       document.dispatchEvent(thisEvent);
     } else if (e.target === addingJob) {
-      console.log(editJob.dataset.id);
       if (!editJob.dataset.id) {
         // this is an attempted add
         suspendInput = true;
@@ -243,11 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
             status.value = "pending";
           } else {
             // failure
-            console.log("at 21");
             message.textContent = data.msg;
           }
         } catch (err) {
-          console.log("at 7");
           message.textContent = "A communication error occurred.";
         }
         suspendInput = false;
@@ -281,12 +281,12 @@ document.addEventListener("DOMContentLoaded", () => {
             message.textContent = data.msg;
           }
         } catch (err) {
-          console.log("at 9");
           message.textContent = "A communication error occurred.";
         }
       }
       suspendInput = false;
-    } else if (e.target.classList.contains("editButton")) {
+    } // section 5
+    else if (e.target.classList.contains("editButton")) {
       editJob.dataset.id = e.target.dataset.id;
       suspendInput = true;
       try {
