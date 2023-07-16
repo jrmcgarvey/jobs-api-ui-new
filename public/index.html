@@ -9,11 +9,10 @@
 
   <body>
     <h1>Jobs List</h1>
-    <button type="button" id="logoff" style="display: none">logoff</button>
     <hr />
     <p id="message"></p>
     <hr />
-    <div id="logon-register" style="display: none">
+    <div id="logon-register" style="display: block">
       <button type="button" id="logon">logon</button>
       <button type="button" id="register">register</button>
     </div>
@@ -54,7 +53,6 @@
       </form>
     </div>
     <div id="jobs" style="display: none">
-      <p id="jobs-message"></p>
       <table id="jobs-table" style="display: none">
         <tr id="jobs-table-header">
           <th>Company</th>
@@ -64,6 +62,7 @@
         </tr>
       </table>
       <button type="button" id="add-job">add job</button>
+      <button type="button" id="logoff">logoff</button>
     </div>
     <div id="edit-job" style="display: none">
       <form>
@@ -87,6 +86,10 @@
         <button type="button" id="edit-cancel">cancel</button>
       </form>
     </div>
-    <script src="./jobs.js"></script>
+    <script src="./index.js" type="module"></script>
+    <script src="./jobs.js" type="module"></script>
+    <script src="./loginRegister.js" type="module"></script>
+    <script src="./login.js" type="module"></script>
+    <script src="./addEdit.js" type="module"></script>
   </body>
 </html>
