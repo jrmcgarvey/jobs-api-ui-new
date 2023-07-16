@@ -1,5 +1,5 @@
 let jobsDiv = null;
-import { enabled, setDiv, message, setToken, token } from "./index.js";
+import { enabled, setDiv, message, setToken, token, enable } from "./index.js";
 import { showLoginRegister } from "./loginRegister.js";
 import { showAddEdit } from "./addEdit.js";
 let jobsTable = null;
@@ -15,7 +15,7 @@ export const handleJobs = () => {
     if (enabled && e.target.nodeName === "BUTTON") {
       if (e.target === addJob) {
         message.textContent = "";
-        showAddEdit();
+        showAddEdit(null);
       } else if (e.target === logoff) {
         setToken(null);
         localStorage.removeItem("token");
@@ -23,6 +23,9 @@ export const handleJobs = () => {
         jobsTable.replaceChildren([jobsTableHeader]);
         lo;
         showLoginRegister();
+      } else if (e.target.classList.contains("editButton")) {
+        message.textContent = "";
+        showAddEdit(e.target.dataset.id);
       }
     }
   });
@@ -30,6 +33,7 @@ export const handleJobs = () => {
 
 export const showJobs = async () => {
   try {
+    enable(false);
     const response = await fetch("/api/v1/jobs", {
       method: "GET",
       headers: {
@@ -60,5 +64,6 @@ export const showJobs = async () => {
     console.log(err);
     message.textContent = "A communication error occurred.";
   }
+  enable(true);
   setDiv(jobsDiv);
 };
