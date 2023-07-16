@@ -37,6 +37,7 @@ export const handleLogin = () => {
             message.textContent = data.msg;
           }
         } catch (err) {
+          console.log(err);
           message.textContent = "A communications error occurred.";
         }
         enable(true);
