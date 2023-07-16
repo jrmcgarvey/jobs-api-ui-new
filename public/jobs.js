@@ -11,7 +11,7 @@ export const handleJobs = () => {
   const addJob = document.getElementById("add-job");
   jobsTable = document.getElementById("jobs-table");
   jobsTableHeader = document.getElementById("jobs-table-header");
-  jobsDiv.addEventListener("click", (e) => {
+  jobsDiv.addEventListener("click", async (e) => {
     if (enabled && e.target.nodeName === "BUTTON") {
       if (e.target === addJob) {
         message.textContent = "";
@@ -21,11 +21,31 @@ export const handleJobs = () => {
         localStorage.removeItem("token");
         message.textContent = "You have been logged off.";
         jobsTable.replaceChildren([jobsTableHeader]);
-        lo;
         showLoginRegister();
       } else if (e.target.classList.contains("editButton")) {
         message.textContent = "";
         showAddEdit(e.target.dataset.id);
+      } else if (e.target.classList.contains("deleteButton")) {
+        enable(false);
+        try {
+          const response = await fetch(`/api/v1/jobs/${e.target.dataset.id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.status === 200) {
+            message.textContent = "The jobs entry was deleted.";
+          } else {
+            message.textContent = "The jobs entry was not found.";
+          }
+        } catch (err) {
+          console.log(err);
+          message.textContent = "A communication error occurred.";
+        }
+        enable(true);
+        showJobs();
       }
     }
   });
