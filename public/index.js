@@ -1,5 +1,8 @@
 let activeDiv = null;
 export let enabled = true;
+export const enable = (state) => {
+  enabled = state
+}
 
 export const setDiv = (div) => {
   if (div != activeDiv) {
@@ -11,6 +14,9 @@ export const setDiv = (div) => {
   }
 };
 export let token = null;
+export const setToken = (value) => {
+  token=value;
+}
 export let message = null;
 import { showJobs, handleJobs } from "./jobs.js";
 import { showLoginRegister, handleLoginRegister } from "./loginRegister.js";
